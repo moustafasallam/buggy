@@ -1,0 +1,26 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+
+development:
+  <<: *default
+  database: buggy_development
+  username: postgres
+  password:
+  host: db
+
+test:
+  <<: *default
+  database: buggy_test
+  username: postgres
+  password:
+  host: db
+
+production:
+  <<: *default
+  database: buggy_production
+  username: buggy
+  password: <%= ENV['BUGGY_DATABASE_PASSWORD'] %>
