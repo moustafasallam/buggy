@@ -1,0 +1,39 @@
+  <div class="row">
+    <form class="col s12" action="/" method="get">
+
+      <div class="row">
+        <div class="input-field col s9">
+          <input placeholder="search" name="query" type="text" class="validate">
+          <label for="first_name">First Name</label>
+        </div>
+        <div class="input-field col s3">
+          <input type="submit" value="search!" class="btn">
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+
+  <table>
+    <thead>
+      <tr>
+        <th>Token</th>
+        <th>State</th>
+        <th>Priority</th>
+        <th>comment</th>
+      </tr>
+    </thead>
+    <tbody>
+
+		<% @bugs.each do |b| %>
+      <tr>
+        <td><%= b.app_token %></td>
+        <td><%= b.state %></td>
+        <td><%= b.priority %></td>
+        <td><%= b.comment %></td>
+      </tr>
+		<% end %>
+
+      </tbody>
+  </table>

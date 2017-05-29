@@ -4,8 +4,13 @@ tokens = []
 end
 
 0..200.times do |n|
-	bug = bug.new
-	bug.app_token = tokens.sample
+	token = tokens.sample
+	last = Bug.where(app_token: token).order(number: :desc).first
+	serial = last.present? ? (last.number + 1) : 1
+
+	bug = Bug.new
+	bug.app_token = token
+	bug.number = serial
 	bug.priority = Bug.priorities.sample
 	bug.comment = Faker::Lorem.paragraph
 
@@ -14,8 +19,8 @@ end
 	state.os = ["IOS09", "IOS10", "IOS11", "IOS12"].sample
 	state.memory = rand(1000..10000)
 	state.storage = rand(10000..10000)
-	state.save
+	state.save!
 
 	bug.state_id = state.id
-	bug.save
+	bug.save!
 end

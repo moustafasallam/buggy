@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170524224131) do
+ActiveRecord::Schema.define(version: 20170528112049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,18 +19,18 @@ ActiveRecord::Schema.define(version: 20170524224131) do
   create_table "bugs", force: :cascade do |t|
     t.string   "app_token"
     t.integer  "number",     default: 0
-    t.string   "status",     default: "new"
+    t.string   "state",      default: "new"
     t.string   "priority",   default: "minor"
     t.text     "comment",    default: ""
-    t.integer  "state_id",   default: 0
+    t.integer  "device_id",  default: 0
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
   end
 
-  add_index "bugs", ["state_id"], name: "index_bugs_on_state_id", using: :btree
+  add_index "bugs", ["device_id"], name: "index_bugs_on_device_id", using: :btree
 
-  create_table "states", force: :cascade do |t|
-    t.string   "device"
+  create_table "devices", force: :cascade do |t|
+    t.string   "name"
     t.string   "os"
     t.integer  "memory",     default: 0
     t.integer  "storage",    default: 0

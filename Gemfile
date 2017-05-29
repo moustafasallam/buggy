@@ -19,12 +19,17 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'faker', '~> 1.6', '>= 1.6.3'
-gem 'transitions', '~> 1.2', :require => ["transitions", "active_record/transitions"] # Lightweight state machine extracted from ActiveModel
 
+gem 'transitions', '~> 1.2', :require => ["transitions", "active_model/transitions"] # Lightweight state machine extracted from ActiveModel
+gem 'pry-rails', '~> 0.3.4' #enhanced ruby console
+
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+
+gem 'materialize-sass', '~> 0.98.2' #materialize css based on material design
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  gem 'pry-byebug', '~> 3.4', '>= 3.4.2'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
