@@ -28,3 +28,5 @@ end
 		bug.save!
 	end
 end
+
+Bug.import(force: true)
