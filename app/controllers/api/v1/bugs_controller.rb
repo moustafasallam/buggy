@@ -13,7 +13,7 @@ module Api::V1
 			params[:user_agent] = request.env['HTTP_USER_AGENT']
 			conductor.send(params.to_json)
 			conductor.close
-			success({})
+			success({}, "Bug has been queued successfully!")
 		end
 
 	end

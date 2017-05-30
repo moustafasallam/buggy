@@ -43,3 +43,9 @@ group :development, :test do
   gem 'spring'
 end
 
+group :test do
+	gem 'rspec-rails', '~> 3.5'
+  gem 'factory_girl_rails'
+  gem 'guard-rspec'
+  gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
+end

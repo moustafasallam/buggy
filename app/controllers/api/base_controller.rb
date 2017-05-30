@@ -8,9 +8,9 @@ module Api
 	    render json: {success: false, code: status, message: message, payload: {}}, status: status
 	  end
 
-	  def success(data=nil)
+	  def success(data=nil, message="SUCCESS")
 	    data = JSON.parse render_to_string if data.nil?
-	    render json: {success: true, code: 200 , message: 'SUCCESS', payload: data}, status: '200'
+	    render json: {success: true, code: 200 , message: message, payload: data}, status: '200'
 	  end
 
 	  def render_404

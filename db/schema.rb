@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170529123957) do
+ActiveRecord::Schema.define(version: 20170530212342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20170529123957) do
   end
 
   add_index "bugs", ["device_id"], name: "index_bugs_on_device_id", using: :btree
+  add_index "bugs", ["registered_app_id", "number"], name: "index_bugs_on_registered_app_id_and_number", unique: true, using: :btree
   add_index "bugs", ["registered_app_id"], name: "index_bugs_on_registered_app_id", using: :btree
 
   create_table "devices", force: :cascade do |t|
@@ -45,5 +46,7 @@ ActiveRecord::Schema.define(version: 20170529123957) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  add_index "registered_apps", ["token"], name: "index_registered_apps_on_token", unique: true, using: :btree
 
 end
