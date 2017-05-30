@@ -14,4 +14,4 @@ to boot it up do the follow steps
 
 7- `bundle exec whenever --update-crontab`
 
-8- all set you can now test the app by visiting the following url `localhost:3000`
+8- all set you can now test the app by visiting the following url `localhost:4000`
