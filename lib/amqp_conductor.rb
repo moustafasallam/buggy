@@ -14,13 +14,11 @@ class AmqpConductor
 	end
 
 	def receive
-		@ch.prefetch(1)
 		data = []
 		@queue.subscribe(manual_ack: true) do |delivery_info, metadata, payload|
 			data << JSON.parse(payload)
 			@ch.ack(delivery_info.delivery_tag)
 		end
-		puts "\n\n\n rabbit payload: #{data.inspect}\n\n\n"
 		data
 	end
 

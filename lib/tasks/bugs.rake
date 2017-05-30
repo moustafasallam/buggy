@@ -3,10 +3,9 @@ namespace :bugs do
   desc "add new bug"
   task :create => :environment do
     conductor = AmqpConductor.new
-    data = conductor.receive || []
+    data = conductor.receive
     data.each do |params|
       app = RegisteredApp.where(token: params["token"]).first
-      puts "\n\n\napp: #{app.inspect}\n\n\n"
       if app.present?
         ActiveRecord::Base.transaction do
           app.update_serial
