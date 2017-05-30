@@ -1,26 +1,30 @@
-tokens = []
-0..30.times do |n|
-	tokens << SecureRandom.urlsafe_base64(nil, false)
+0..90.times do |n|
+	app = RegisteredApp.new
+	app.token = loop do
+    random_token = SecureRandom.urlsafe_base64(nil, false)
+    break random_token unless RegisteredApp.exists?(token: random_token)
+  end
+  app.save!
 end
 
-0..200.times do |n|
-	token = tokens.sample
-	last = Bug.where(app_token: token).order(number: :desc).first
-	serial = last.present? ? (last.number + 1) : 1
+0..600.times do |n|
+	ActiveRecord::Base.transaction do
+		app = RegisteredApp.order("RANDOM()").first
+		app.update_serial
+		bug = Bug.new
+		bug.registered_app_id = app.id
+		bug.number = app.serial
+		bug.priority = Bug.priorities.sample
+		bug.comment = Faker::Lorem.paragraph
 
-	bug = Bug.new
-	bug.app_token = token
-	bug.number = serial
-	bug.priority = Bug.priorities.sample
-	bug.comment = Faker::Lorem.paragraph
+		device = Device.new
+		device.name = ["iphone 5", "iphone 4", "iphone 6", "iphone 7"].sample
+		device.os = ["IOS09", "IOS10", "IOS11", "IOS12"].sample
+		device.memory = rand(1000..10000)
+		device.storage = rand(10000..10000)
+		device.save!
 
-	state = State.new
-	state.device = ["iphone 5", "iphone 4", "iphone 6", "iphone 7"].sample
-	state.os = ["IOS09", "IOS10", "IOS11", "IOS12"].sample
-	state.memory = rand(1000..10000)
-	state.storage = rand(10000..10000)
-	state.save!
-
-	bug.state_id = state.id
-	bug.save!
+		bug.device_id = device.id
+		bug.save!
+	end
 end

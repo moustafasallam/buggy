@@ -3,7 +3,7 @@
 
       <div class="row">
         <div class="input-field col s9">
-          <input placeholder="search" name="query" type="text" class="validate">
+          <input placeholder="search" name="query" type="text" class="validate" value="<%= params[:query] %>">
           <label for="first_name">First Name</label>
         </div>
         <div class="input-field col s3">
@@ -19,6 +19,7 @@
     <thead>
       <tr>
         <th>Token</th>
+        <th>device</th>
         <th>State</th>
         <th>Priority</th>
         <th>comment</th>
@@ -28,7 +29,8 @@
 
 		<% @bugs.each do |b| %>
       <tr>
-        <td><%= b.app_token %></td>
+        <td><%= b.registered_app.token %></td>
+        <td><%= b.device.name %> / <%= b.device.os %></td>
         <td><%= b.state %></td>
         <td><%= b.priority %></td>
         <td><%= b.comment %></td>

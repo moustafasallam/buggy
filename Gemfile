@@ -28,6 +28,11 @@ gem 'elasticsearch-rails'
 
 gem 'materialize-sass', '~> 0.98.2' #materialize css based on material design
 
+gem 'browser', '~> 2.4' #detect browser and devices
+
+gem 'bunny', '~> 2.5' #rabbitmq lib
+gem 'whenever', '~> 0.9.4' #for scheduled cron jobs
+
 group :development, :test do
   gem 'pry-byebug', '~> 3.4', '>= 3.4.2'
   # Access an IRB console on exception pages or by using <%= console %> in views

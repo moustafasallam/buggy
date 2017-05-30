@@ -5,7 +5,8 @@ class Bug < ActiveRecord::Base
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
-	belongs_to :device
+	belongs_to :registered_app
+  belongs_to :device
 
 	state_machine do
     state :new
@@ -25,5 +26,16 @@ class Bug < ActiveRecord::Base
   	['minor', 'major', 'critical']
   end
 
+  def priority=(value)
+    value = Bug.priorities.include?(value.to_s.downcase) ? value.to_s.downcase : 'minor'
+    super(value)
+  end
+
+  def as_indexed_json(options={})
+    as_json(
+      only: [:id, :number, :priority, :state, :comment],
+      include: [:registered_app, :device]
+    )
+  end
+
 end
-Bug.import(force: true) # for auto sync model with elastic search
